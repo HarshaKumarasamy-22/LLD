@@ -114,7 +114,8 @@ app.MapControllers();
 
 app.MapGet("/", () => Results.Ok(new
 {
-    App = "Tea Estate 360 API",
+    App = "TwoLeaves API",
+    Estate = "Little Liddesdale Estate",
     Version = "1.0.0",
     Status = "Healthy",
     TimestampUtc = DateTime.UtcNow

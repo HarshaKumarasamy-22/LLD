@@ -61,7 +61,7 @@ export default function App() {
       </main>
 
       <footer className="bg-white border-t border-slate-200 py-3 text-center text-[11px] text-slate-400">
-        Smart Tea Estate Management System &bull; Version 1.0 &bull; Licensed for Estate Operations
+        TwoLeaves &bull; Little Liddesdale Estate &bull; Version 1.0
       </footer>
     </div>
   );

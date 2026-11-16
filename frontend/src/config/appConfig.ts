@@ -1,22 +1,26 @@
 /**
  * Application Branding & Configuration
  * 
- * Note: You can change the title, logo, and app branding here anytime
- * before starting deployment.
+ * App Name: TwoLeaves
+ * Estate Name: Little Liddesdale Estate (LLD)
  */
 export const APP_CONFIG = {
-  // Brand name (placeholder - easily updated during deployment)
-  name: "Tea Estate 360",
-  shortName: "TE360",
+  // Official Project Brand Name
+  name: "TwoLeaves",
+  shortName: "TwoLeaves",
   tagline: "Smart Tea Estate Management & Monitoring System",
   
-  // Branding Assets (replace these files in /public or /assets at deployment)
+  // Estate Specific Information
+  defaultEstateName: "Little Liddesdale Estate",
+  estateCode: "LLD",
+  
+  // Branding Assets
   logoUrl: "/logo.svg",
   faviconUrl: "/favicon.ico",
   
   // System metadata
   version: "1.0.0",
-  defaultTimeZone: "Asia/Colombo", // Configurable per estate
+  defaultTimeZone: "Asia/Colombo",
   units: {
     weight: "kg",
     area: "ha",

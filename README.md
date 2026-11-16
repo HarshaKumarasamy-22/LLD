@@ -1,6 +1,7 @@
-# Tea Estate Management System (Clean Architecture Monorepo)
+# TwoLeaves - Smart Tea Estate Management System
+### Little Liddesdale Estate (LLD)
 
-A production-minded, modular web application for tea estate operations, crop yield monitoring, field management, plucker intake, agronomy activities, and reporting.
+A production-minded, modular web application for tea estate operations, crop yield monitoring, field management, plucker intake, agronomy activities, and reporting tailored for **Little Liddesdale Estate**.
 
 ---
 
