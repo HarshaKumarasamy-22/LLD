@@ -12,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // 1. Database Connection
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
-    ?? "Host=localhost;Port=5432;Database=tea_estate_db;Username=postgres;Password=dev_postgres_secret_123";
+    ?? "Host=localhost;Port=5433;Database=tea_estate_db;Username=postgres;Password=dev_postgres_secret_123";
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(connectionString));
