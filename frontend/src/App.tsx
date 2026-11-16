@@ -1,45 +1,66 @@
-import React from 'react';
-import { APP_CONFIG } from './config/appConfig';
+import { useState, useEffect } from 'react';
+import { AuthUser, getStoredUser, clearAuthSession } from './services/api';
+import { LoginPage } from './features/auth/LoginPage';
+import { Navbar } from './components/Navbar';
+import { DashboardPage } from './features/dashboard/DashboardPage';
+import { FieldsPage } from './features/fields/FieldsPage';
+import { PluckersPage } from './features/pluckers/PluckersPage';
+import { FieldWeightsPage } from './features/field-weights/FieldWeightsPage';
+import { IntakesPage } from './features/pluckers/IntakesPage';
+import { ReconciliationPage } from './features/reports/ReconciliationPage';
 
 export default function App() {
-  return (
-    <div className="min-h-screen bg-slate-50 flex flex-col justify-center items-center p-6">
-      <div className="max-w-xl w-full bg-white rounded-xl shadow-md p-8 border border-slate-100 text-center">
-        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-emerald-100 text-emerald-700 mb-4 text-2xl font-bold">
-          🌱
-        </div>
-        <h1 className="text-2xl font-bold text-slate-800 tracking-tight">
-          {APP_CONFIG.name}
-        </h1>
-        <p className="text-slate-500 mt-2 text-sm">
-          {APP_CONFIG.tagline}
-        </p>
+  const [user, setUser] = useState<AuthUser | null>(null);
+  const [activeTab, setActiveTab] = useState('dashboard');
+  const [initChecked, setInitChecked] = useState(false);
 
-        <div className="mt-6 pt-6 border-t border-slate-100 flex flex-col gap-2 text-left text-sm text-slate-600">
-          <div className="flex justify-between py-1">
-            <span className="font-medium text-slate-500">Frontend Stack:</span>
-            <span className="text-slate-800">React + TypeScript + Vite + Tailwind</span>
-          </div>
-          <div className="flex justify-between py-1">
-            <span className="font-medium text-slate-500">Backend Stack:</span>
-            <span className="text-slate-800">ASP.NET Core Web API (.NET 11)</span>
-          </div>
-          <div className="flex justify-between py-1">
-            <span className="font-medium text-slate-500">Database:</span>
-            <span className="text-slate-800">PostgreSQL 16 (via Docker Compose)</span>
-          </div>
-          <div className="flex justify-between py-1">
-            <span className="font-medium text-slate-500">Branding:</span>
-            <span className="text-emerald-600 font-medium">Configurable at deployment</span>
-          </div>
-        </div>
+  useEffect(() => {
+    const stored = getStoredUser();
+    if (stored) {
+      setUser(stored);
+    }
+    setInitChecked(true);
+  }, []);
 
-        <div className="mt-6">
-          <div className="inline-block px-4 py-2 bg-emerald-50 text-emerald-700 font-medium rounded-lg text-xs">
-            Repository Skeleton Initialized on branch: main
-          </div>
-        </div>
+  const handleLogout = () => {
+    clearAuthSession();
+    setUser(null);
+    setActiveTab('dashboard');
+  };
+
+  if (!initChecked) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-slate-900 text-white text-xs">
+        Loading Estate Portal...
       </div>
+    );
+  }
+
+  if (!user) {
+    return <LoginPage onLoginSuccess={(u) => setUser(u)} />;
+  }
+
+  return (
+    <div className="min-h-screen bg-slate-50 flex flex-col font-sans">
+      <Navbar
+        user={user}
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        onLogout={handleLogout}
+      />
+
+      <main className="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
+        {activeTab === 'dashboard' && <DashboardPage user={user} setActiveTab={setActiveTab} />}
+        {activeTab === 'fields' && <FieldsPage user={user} />}
+        {activeTab === 'pluckers' && <PluckersPage user={user} />}
+        {activeTab === 'field-weights' && <FieldWeightsPage user={user} />}
+        {activeTab === 'intakes' && <IntakesPage user={user} />}
+        {activeTab === 'reconciliation' && <ReconciliationPage user={user} />}
+      </main>
+
+      <footer className="bg-white border-t border-slate-200 py-3 text-center text-[11px] text-slate-400">
+        Smart Tea Estate Management System &bull; Version 1.0 &bull; Licensed for Estate Operations
+      </footer>
     </div>
   );
 }
