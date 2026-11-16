@@ -1,0 +1,11 @@
+@TeaEstate.Api_HostAddress = http://localhost:5121
+
+GET {{TeaEstate.Api_HostAddress}}/openapi/v1.json
+Accept: application/json
+
+###
+
+GET {{TeaEstate.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

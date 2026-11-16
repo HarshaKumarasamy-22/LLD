@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/TeaEstate.Api/TeaEstate.Api.csproj" />
+    <Project Path="src/TeaEstate.Application/TeaEstate.Application.csproj" />
+    <Project Path="src/TeaEstate.Domain/TeaEstate.Domain.csproj" />
+    <Project Path="src/TeaEstate.Infrastructure/TeaEstate.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/TeaEstate.IntegrationTests/TeaEstate.IntegrationTests.csproj" />
+    <Project Path="tests/TeaEstate.UnitTests/TeaEstate.UnitTests.csproj" />
+  </Folder>
+</Solution>
