@@ -16,6 +16,7 @@ export const Navbar: React.FC<NavbarProps> = ({ user, activeTab, setActiveTab, o
     { id: 'pluckers', label: 'Pluckers', icon: '👥' },
     { id: 'field-weights', label: 'Daily Field Weights', icon: '⚖️' },
     { id: 'intakes', label: 'Plucker Intakes', icon: '🧺' },
+    { id: 'agronomy', label: 'Agronomy', icon: '🌿' },
     { id: 'reconciliation', label: 'Reconciliation', icon: '🔄' },
   ];
 

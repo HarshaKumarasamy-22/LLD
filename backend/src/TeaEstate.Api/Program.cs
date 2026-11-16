@@ -62,6 +62,7 @@ builder.Services.AddAuthentication(options =>
 // 4. Application Services
 builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
 builder.Services.AddScoped<IYieldCalculationService, YieldCalculationService>();
+builder.Services.AddScoped<IAgronomyService, AgronomyService>();
 
 // 5. CORS Allowlist
 builder.Services.AddCors(options =>
