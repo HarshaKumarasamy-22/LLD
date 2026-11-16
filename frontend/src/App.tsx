@@ -7,6 +7,7 @@ import { FieldsPage } from './features/fields/FieldsPage';
 import { PluckersPage } from './features/pluckers/PluckersPage';
 import { FieldWeightsPage } from './features/field-weights/FieldWeightsPage';
 import { IntakesPage } from './features/pluckers/IntakesPage';
+import { AgronomyPage } from './features/agronomy/AgronomyPage';
 import { ReconciliationPage } from './features/reports/ReconciliationPage';
 
 export default function App() {
@@ -55,6 +56,7 @@ export default function App() {
         {activeTab === 'pluckers' && <PluckersPage user={user} />}
         {activeTab === 'field-weights' && <FieldWeightsPage user={user} />}
         {activeTab === 'intakes' && <IntakesPage user={user} />}
+        {activeTab === 'agronomy' && <AgronomyPage user={user} />}
         {activeTab === 'reconciliation' && <ReconciliationPage user={user} />}
       </main>
 

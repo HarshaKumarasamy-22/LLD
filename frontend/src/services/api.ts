@@ -135,4 +135,68 @@ export const api = {
     const query = search.toString() ? `?${search.toString()}` : '';
     return fetchWithAuth<any[]>(`/reconciliation${query}`);
   },
+
+  // Fertilizers
+  getFertilizerTypes: () => fetchWithAuth<any[]>('/fertilizers/types'),
+  getFertilizerApplications: (params?: { fieldId?: string; fertilizerTypeId?: string; fromDate?: string; toDate?: string }) => {
+    const search = new URLSearchParams();
+    if (params?.fieldId) search.append('fieldId', params.fieldId);
+    if (params?.fertilizerTypeId) search.append('fertilizerTypeId', params.fertilizerTypeId);
+    if (params?.fromDate) search.append('fromDate', params.fromDate);
+    if (params?.toDate) search.append('toDate', params.toDate);
+    const query = search.toString() ? `?${search.toString()}` : '';
+    return fetchWithAuth<any[]>(`/fertilizers/applications${query}`);
+  },
+  recordFertilizerApplication: (data: { fieldId: string; fertilizerTypeId: string; applicationDate: string; quantityKg: number; method?: string; notes?: string }) =>
+    fetchWithAuth<any>('/fertilizers/applications', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+
+  // Soil pH
+  getSoilPHRecords: (params?: { fieldId?: string; fromDate?: string; toDate?: string }) => {
+    const search = new URLSearchParams();
+    if (params?.fieldId) search.append('fieldId', params.fieldId);
+    if (params?.fromDate) search.append('fromDate', params.fromDate);
+    if (params?.toDate) search.append('toDate', params.toDate);
+    const query = search.toString() ? `?${search.toString()}` : '';
+    return fetchWithAuth<any[]>(`/soil-ph${query}`);
+  },
+  getLatestSoilPHByField: () => fetchWithAuth<any[]>('/soil-ph/latest-by-field'),
+  recordSoilPH: (data: { fieldId: string; testedDate: string; phValue: number; sampleRef?: string; testerName?: string; notes?: string }) =>
+    fetchWithAuth<any>('/soil-ph', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+
+  // Weeding
+  getWeedingActivities: (params?: { fieldId?: string; statusFilter?: string }) => {
+    const search = new URLSearchParams();
+    if (params?.fieldId) search.append('fieldId', params.fieldId);
+    if (params?.statusFilter) search.append('statusFilter', params.statusFilter);
+    const query = search.toString() ? `?${search.toString()}` : '';
+    return fetchWithAuth<any[]>(`/weeding${query}`);
+  },
+  createWeedingPlan: (data: { fieldId: string; plannedDate: string; method?: string; notes?: string }) =>
+    fetchWithAuth<any>('/weeding/plan', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+  completeWeeding: (id: string, data: { completedDate: string; responsiblePerson?: string; notes?: string }) =>
+    fetchWithAuth<any>(`/weeding/${id}/complete`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    }),
+
+  // Pruning
+  getPruningRecords: (fieldId?: string) => {
+    const query = fieldId ? `?fieldId=${fieldId}` : '';
+    return fetchWithAuth<any[]>(`/pruning${query}`);
+  },
+  getLastPruningByField: () => fetchWithAuth<any[]>('/pruning/last-by-field'),
+  recordPruning: (data: { fieldId: string; pruningDate: string; pruningType?: string; notes?: string }) =>
+    fetchWithAuth<any>('/pruning', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
 };
